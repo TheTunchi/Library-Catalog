@@ -23,7 +23,7 @@ jobs:
     - name: install npm dependencies
       run: npm install
     - name: change config
-      run: echo "export const settings = { host:\"https://localhost:3000\"}" > /config.js
+      run: echo "export const settings = { host:\"http://localhost:3000\"}" > /config.js
     - name: start backend
       run: npm run start-be &
     - name: start frontend
