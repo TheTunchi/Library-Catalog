@@ -1,0 +1,30 @@
+
+name: Build and Test
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+
+    steps:
+    - name: check out the repo
+      uses: actions/checkout@v4
+    - name: Use Node.js 20.x
+      uses: actions/setup-node@v3
+      with:
+        node-version: 20.x
+        cache: 'npm'
+    - name: install npm dependencies
+      run: npm install
+    - name: start backend
+      run: npm run start-be
+    - name: start frontend
+      run: npm run start-fe
+    - name: start test
+      run: npm run test:ui
