@@ -154,8 +154,3 @@ test('Verify "All Books" link is visible for logged in user', async ({ page }) =
             expect(page.url()).toContain('http://localhost:3000/register');
         }
     )});
-    ////Add book tests////
-
-    test('Add book with correct fields', async ({ page }) => {
-        await login(page);
-        
