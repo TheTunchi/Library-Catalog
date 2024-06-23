@@ -1,1 +1,1 @@
-export const settings = { host: "https://library-catalog-h6rs.onrender.com" }
+export const settings = { host: "http://localhost:3030" }
