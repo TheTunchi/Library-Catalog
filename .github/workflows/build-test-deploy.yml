@@ -33,24 +33,32 @@ jobs:
 
   deploy_be:
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
     needs: build
     steps:
-      - name: Deploy to production
-        uses: johnbeynon/render-deploy-action@v0.0.8
-        with:
-          service-id: ${{ secrets.RENDER_KEY }}
-          api-key: ${{ secrets.API_KEYBE}}
-      - name: sleep 60s
-        run: sleep 60
+    - name: check out the repo
+      uses: actions/checkout@v4
+    - name: deploy backend
+      uses: JorgeLNJunior/render-deploy@v1.4.4
+      with:
+        service_id: ${{ secrets.RENDER_KEY }}
+        api_key: ${{ secrets.API_KEYBE }}
+        clear_cache: true
+        wait_deploy: true
+        github_token: ${{ secrets.TOKEN_GH }}
 
   deploy_fe:
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
     needs: deploy_be
     steps:
-      - name: Deploy to production
-        uses: johnbeynon/render-deploy-action@v0.0.8
-        with:
-          service-id: ${{ secrets.RENDER_KEY }}
-          api-key: ${{ secrets.API_KEYFE}}
-      - name: sleep 60s
-        run: sleep 60
+    - name: check out the repo
+      uses: actions/checkout@v4
+    - name: deploy backend
+      uses: JorgeLNJunior/render-deploy@v1.4.4
+      with:
+        service_id: ${{ secrets.RENDER_KEY }}
+        api_key: ${{ secrets.API_KEYFE }}
+        clear_cache: true
+        wait_deploy: true
+        github_token: ${{ secrets.TOKEN_GH }}
